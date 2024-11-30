@@ -1,0 +1,86 @@
+#include<stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+
+struct node
+{
+    int data;
+    struct node *prev;
+    struct node *next;
+};
+
+struct node *head=NULL;
+
+struct node *create_node(int data){
+    struct node *obj1 = (struct node*)malloc(sizeof(struct node));
+    obj1-> data = data;
+    obj1->prev = NULL;
+    obj1->next = NULL;
+    return(obj1);
+}
+
+void insert_node(int data)
+{
+     struct node *obj = create_node(data);
+     if(head==NULL)
+     {
+         head = obj;
+     }
+     else{
+         obj->next = head;
+         head->prev = obj;
+         head = obj;
+     }
+}
+
+void append_node(int pos, int data)
+{
+    struct node *ptr = head;
+    struct node *obj = create_node(data);
+    for(int i=1;i<pos;i++)
+    {
+        ptr=ptr->next;
+    }
+    ptr->prev->next = obj;
+    obj->prev=ptr->prev;
+    ptr->prev=obj;
+    obj->next=ptr;
+
+}
+
+void delete_node(int data)
+{
+    struct node *ptr = head;
+    while(ptr->data != data && ptr!=NULL)
+    {
+        ptr=ptr->next;
+    }
+    ptr->prev->next = ptr->next;
+    ptr->next->prev=ptr->prev;
+    free(ptr);
+}
+
+void display(struct node *head)
+{
+    struct node *ptr = head;
+    while(ptr!=NULL)
+    {
+        printf("%d -> ", ptr->data);
+        ptr=ptr->next;
+    }
+}
+
+void main()
+{
+    insert_node(70);
+    insert_node(80);
+    insert_node(30);
+    insert_node(60);
+    insert_node(60);
+    insert_node(90);
+    append_node(6,15);
+    append_node(4,14);
+    append_node(2,13);
+    delete_node(80);
+    display(head);
+}
