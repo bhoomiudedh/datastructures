@@ -1,0 +1,88 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX 5  
+
+typedef struct {
+    int items[MAX];
+    int top;
+} Stack;
+
+
+void initStack(Stack* s) {
+    s->top = -1;
+}
+
+
+int isFull(Stack* s) {
+    return s->top == MAX - 1;
+}
+
+
+int isEmpty(Stack* s) {
+    return s->top == -1;
+}
+
+
+void push(Stack* s, int item) {
+    if (isFull(s)) {
+        printf("Stack Overflow! Cannot push %d\n", item);
+    } else {
+        s->items[++(s->top)] = item;
+        printf("Pushed %d to the stack.\n", item);
+    }
+}
+
+
+int pop(Stack* s) {
+    if (isEmpty(s)) {
+        printf("Stack Underflow! Cannot pop from an empty stack.\n");
+        return -1;  // Return -1 to indicate error
+    } else {
+        return s->items[(s->top)--];
+    }
+}
+
+
+void display(Stack* s) {
+    if (isEmpty(s)) {
+        printf("Stack is empty.\n");
+    } else {
+        printf("Stack contents: ");
+        for (int i = 0; i <= s->top; i++) {
+            printf("%d ", s->items[i]);
+        }
+        printf("\n");
+    }
+}
+
+
+int main() {
+    Stack stack;
+    initStack(&stack);
+
+    
+    push(&stack, 10);
+    push(&stack, 20);
+    push(&stack, 30);
+    push(&stack, 40);
+    push(&stack, 50);
+    push(&stack, 60);  
+
+    
+    display(&stack);
+
+   
+    printf("Popped: %d\n", pop(&stack));
+    printf("Popped: %d\n", pop(&stack));
+    printf("Popped: %d\n", pop(&stack));
+    printf("Popped: %d\n", pop(&stack));
+    printf("Popped: %d\n", pop(&stack));
+    printf("Popped: %d\n", pop(&stack)); 
+
+   
+    display(&stack);
+
+    return 0;
+}
