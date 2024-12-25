@@ -1,0 +1,16 @@
+struct ListNode* deleteDuplicates(struct ListNode* head) {
+    struct ListNode* ptr = head;
+    while (ptr != NULL && ptr->next != NULL) {
+        if (ptr->val == ptr->next->val) {
+      
+            struct ListNode* ptr1 = ptr->next;
+            ptr->next = ptr->next->next; 
+            
+        } else {
+         
+            ptr = ptr->next;
+        }
+    }
+    
+    return head;
+}
