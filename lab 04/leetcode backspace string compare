@@ -1,0 +1,29 @@
+bool backspaceCompare(char* s, char* t) {
+    int i, top = 0, len1 = strlen(s), len2 = strlen(t);
+
+    for (i = 0;  i < len1; i++) {
+        if (s[i] != '#')
+            s[top++] = s[i];
+        else {
+            if (top > 0)
+                top--;
+        }
+    }
+
+    s[top] = '\0';
+
+    top = 0;
+
+    for (i = 0;  i < len2; i++) {
+        if (t[i] != '#')
+            t[top++] = t[i];
+        else {
+            if (top > 0)
+                top--;
+        }
+    }
+
+    t[top] = '\0';
+    
+    return strcmp(s, t) == 0;
+}
