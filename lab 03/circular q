@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<stdllib.h>
 #define Max 5  
 int queue[Max];
 int front = -1;
